@@ -5,7 +5,7 @@ pipeline {
             steps {
                 checkout{{
                     $class: 'GITSON'
-                    branches: [[name: "*/main"]],
+                    branches: [[name: "*/master"]],
                     extensions: [],
                     userRemoteConfigs: [[
                         url:https:'https://github.com/dvartee/Jenkins-repo.git'
