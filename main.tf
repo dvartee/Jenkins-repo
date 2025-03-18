@@ -7,7 +7,7 @@ resource "aws_s3_bucket" "examplebucket" {
 resource "aws_s3_bucket_versioning" "example" {
   bucket = aws_s3_bucket.examplebucket.id
   versioning_configuration {
-    status = "Enabled"
+    status = "Disabled"
   }
 }
 resource "aws_s3_bucket_server_side_encryption_configuration" "example_bucket_encryption" {
