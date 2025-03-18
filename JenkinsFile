@@ -3,9 +3,9 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                checkout{{
+                checkout scm {{
                     $class: 'GITSON'
-                    branches: [[name: "*/master"]],
+                    branches: [[name: "*/main"]],
                     extensions: [],
                     userRemoteConfigs: [[
                         url:https:'https://github.com/dvartee/Jenkins-repo.git'
@@ -19,10 +19,10 @@ pipeline {
             }
         }
         stage('Plan Terraform') {
-            step {
+            steps {
                 script {
                     def planResult = sh(script: 'terraform plan -detailed-exitcode -out=tfplan', returnStatus: true)
-                    if (planResult !=0 && planResult !=2) {
+                    if (planResult != 0 && planResult != 2) {
                         error "Terraform plan failed with exit code ${planResult}"
                     }
                 }
@@ -36,7 +36,7 @@ pipeline {
     }
     post {
         always {
-            sh 'rm -t tfplan'
+            sh 'rm -f tfplan' // Use -f to avoid error if tfplan doesn't exist
         }
         success {
             echo 'Terraform deployment successful'
