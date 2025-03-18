@@ -1,23 +1,6 @@
 pipeline {
     agent any
     stages {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        stage('checkout') {
-            steps {
-                checkout scm {{
-                    $class: 'GITSON'
-                    branches: [[name: "*/main"]],
-                    extensions: [],
-                    userRemoteConfigs: [[
-                        url:https:'https://github.com/dvartee/Jenkins-repo.git'
-                    ]]
-                }}
-            }
-        }
-=======
-=======
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
         stage('Checkout') {
             steps {
                 checkout([
@@ -31,23 +14,12 @@ pipeline {
             }
         }
 
-<<<<<<< HEAD
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
-=======
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
         stage('Terraform Init') {
             steps {
                 sh 'terraform init'
             }
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
-=======
-
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
         stage('Plan Terraform') {
             steps {
                 script {
@@ -58,14 +30,7 @@ pipeline {
                 }
             }
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
-=======
-
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
         stage('Apply Terraform') {
             steps {
                 sh 'terraform apply -auto-approve tfplan'
@@ -74,18 +39,6 @@ pipeline {
     }
     post {
         always {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            sh 'rm -f tfplan' // Use -f to avoid error if tfplan doesn't exist
-        }
-        success {
-            echo 'Terraform deployment successful'
-        }
-        failure {
-            echo 'Terraform deployment failed'
-=======
-=======
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
             sh 'rm -f tfplan'
         }
         success {
@@ -93,10 +46,6 @@ pipeline {
         }
         failure {
             echo 'Terraform deployment failed.'
-<<<<<<< HEAD
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
-=======
->>>>>>> 254f99e94c3bdf4daa216321d8569a7d5576e2e2
         }
     }
 }
